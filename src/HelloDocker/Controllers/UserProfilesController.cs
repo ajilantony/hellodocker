@@ -9,10 +9,10 @@ using DockerASPNETCore.Models;
 
 namespace HelloDocker.Controllers
 {
-    [Route("api/userprofiles")]
+    [Route("api")]
     public class UserProfilesController : Controller
     {
-        [HttpGet]
+        [HttpGet("userprofiles")]
         public IEnumerable<UserProfile> GetUserProfiles()
         {
             var userProfiles = new List<UserProfile>();
@@ -20,7 +20,7 @@ namespace HelloDocker.Controllers
             return userProfiles;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("userprofiles/{id}")]
         public UserProfile Get(int id)
         {
             return new UserProfile() { Id = 1, Guid = Guid.NewGuid(), Username = "akalathil", FirstName = "Ajil", LastName = "Kalathil", Email = "akalathil@usga.org" };
@@ -33,13 +33,13 @@ namespace HelloDocker.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
+        [HttpPut("userprofiles/{id}")]
         public void Put(int id, [FromBody]UserProfile userProfile)
         {
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
+        [HttpDelete("userprofiles/{id}")]
         public void Delete(int id)
         {
         }
