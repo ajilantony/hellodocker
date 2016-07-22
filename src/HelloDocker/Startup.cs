@@ -13,43 +13,46 @@ using Newtonsoft.Json.Serialization;
 
 namespace HelloDocker
 {
-  public class Startup
-  {
-    public Startup(IApplicationEnvironment env)
+    public class Startup
     {
-      // Set up configuration sources.
-      var builder = new ConfigurationBuilder()
-          .SetBasePath(env.ApplicationBasePath)
-          .AddJsonFile("appsettings.json")
-          .AddEnvironmentVariables();
-      Configuration = builder.Build();
-    }
-
-    public IConfigurationRoot Configuration { get; set; }
-
-    // This method gets called by the runtime. Use this method to add services to the container.
-    public void ConfigureServices(IServiceCollection services)
-    {
-      // Add framework services.
-      services.AddMvc()
-        .AddJsonOptions(opts =>
+        public Startup(IApplicationEnvironment env)
         {
-          opts.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-        });
+            // Set up configuration sources.
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ApplicationBasePath)
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
+        }
+
+        public IConfigurationRoot Configuration { get; set; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            //services.AddSingleton<MessageService>();
+
+            // Add framework services.
+            services.AddMvc();
+              //.AddJsonOptions(opts =>
+              //{
+              //    opts.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+              //});
+            
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        {
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+
+            app.UseStaticFiles();
+
+            app.UseMvc();
+        }
+
+        // Entry point for the application.
+        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
-
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-    {
-      loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-      loggerFactory.AddDebug();
-
-      app.UseStaticFiles();
-
-      app.UseMvc();
-    }
-
-    // Entry point for the application.
-    public static void Main(string[] args) => WebApplication.Run<Startup>(args);
-  }
 }
