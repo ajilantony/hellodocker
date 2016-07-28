@@ -21,6 +21,14 @@
         "Hosting:Environment": "Development"
       },
       "sdkVersion": "dnx-coreclr-win-x86.1.0.0-rc1-update2"
+    },
+    "kestrel": {
+      "commandName": "web",
+      "environmentVariables": {
+        "Key": "Value",
+        "DNX_TRACE": "1"
+      },
+      "sdkVersion": "dnx-coreclr-win-x64.1.0.0-rc1-update1"
     }
   }
 }

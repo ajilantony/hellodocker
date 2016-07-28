@@ -47,6 +47,13 @@ namespace HelloDocker
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            //if (env.IsDevelopment())
+            //{
+                //app.UseBrowserLink();
+                //app.UseDeveloperExceptionPage();
+                //app.UseDatabaseErrorPage();
+            //}
+
             app.UseStaticFiles();
 
             app.UseMvc();
