@@ -5,15 +5,17 @@
   },
 
   "dependencies": {
+    "Dapper": "1.50.2",
     "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
     "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
     "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.FileProviderExtensions" : "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.FileProviderExtensions": "1.0.0-rc1-final",
     "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
     "Microsoft.Extensions.Logging": "1.0.0-rc1-final",
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final"
+    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
+    "Npgsql": "3.1.0-*"
   },
 
   "commands": {
@@ -21,10 +23,15 @@
   },
 
   "frameworks": {
-    "dnx451": { },
-    "dnxcore50": { }
+    "dnx451": {
+      "frameworkAssemblies": {
+        "System.Data": {
+          "version": "4.0.0.0",
+          "type": "build"
+        }
+      }
+    }
   },
-
   "exclude": [
     "wwwroot",
     "node_modules"

@@ -30,15 +30,13 @@ namespace HelloDocker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddSingleton<MessageService>();
-
             // Add framework services.
-            services.AddMvc();
-              //.AddJsonOptions(opts =>
-              //{
-              //    opts.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-              //});
-            
+            services.AddMvc()
+              .AddJsonOptions(opts =>
+              {
+                  opts.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+              });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,13 +44,6 @@ namespace HelloDocker
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
-            //if (env.IsDevelopment())
-            //{
-                //app.UseBrowserLink();
-                //app.UseDeveloperExceptionPage();
-                //app.UseDatabaseErrorPage();
-            //}
 
             app.UseStaticFiles();
 
