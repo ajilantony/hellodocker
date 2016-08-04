@@ -6,6 +6,7 @@ using Microsoft.AspNet.Mvc;
 using HelloDocker.Models;
 using Npgsql;
 using Dapper;
+using Swashbuckle.SwaggerGen.Annotations;
 //using Cassandra;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -16,6 +17,8 @@ namespace HelloDocker.Controllers
     public class UserProfilesController : Controller
     {
         [HttpGet("userprofiles")]
+        [Produces(typeof(IEnumerable<UserProfile>))]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, Type = typeof(IEnumerable<UserProfile>))]
         public IEnumerable<UserProfile> GetUserProfiles()
         {
             IEnumerable<UserProfile> userProfiles;
